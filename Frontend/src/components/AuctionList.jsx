@@ -29,7 +29,7 @@ const AuctionList = () => {
   return (
     <section className="py-10 bg-white min-h-screen">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-6">Live Auctions</h2>
+        <h2 className="text-4xl text-primary font-extrabold mb-12">Live Auctions</h2>
         <div className="grid md:grid-cols-3 gap-6 px-4">
           {auctions.map((item) => (
             <motion.div
@@ -46,12 +46,13 @@ const AuctionList = () => {
               <p className="text-gray-200 text-sm mb-2">{item.description}</p>
               <div className="flex justify-between items-center mt-4">
                 <p className="text-gray-300 text-lg font-semibold">{item.currentBid}</p>
-                <motion.button
+                <motion.a
                   className="flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-md hover:bg-slate-100 transition"
                   whileTap={{ scale: 0.9 }}
+                  href='/placeBid'
                 >
                   <FaGavel className="text-lg" /> Place Bid
-                </motion.button>
+                </motion.a>
               </div>
             </motion.div>
           ))}

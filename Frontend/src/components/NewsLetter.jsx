@@ -16,9 +16,9 @@ const NewsletterForm = () => {
   };
 
   return (
-    <section className="py-10 bg-gray-100 text-center">
+    <section className="py-10 bg-indigo-200 text-center">
       <div className="container mx-auto px-6 md:w-1/2">
-        <h2 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+        <h2 className="text-3xl font-extrabold mb-4">Subscribe to Our Newsletter</h2>
         <p className="text-gray-600 mb-6">Stay updated with our latest news and offers.</p>
         <motion.form
           className="flex flex-col md:flex-row items-center gap-4 bg-white p-4 rounded-lg shadow-md"

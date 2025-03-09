@@ -12,6 +12,9 @@ export default {
         secondary: '#a53860',
         teritory: '#da627d',
       },
+      fontFamily: {
+        playfair: ['playfair'],
+      },
     },
   },
   plugins: [],

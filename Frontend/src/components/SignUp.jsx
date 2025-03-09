@@ -12,14 +12,19 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const res = await
-       axios.get("http://jsonplaceholder.typicode.com/users/1", { name, email, password });
+      const res = await axios.post("http://localhost:4001/api/users/signup", { name, email, password });
       alert(res.data.message);
       navigate("/signIn"); // Sign In page pe bhej do
     } catch (error) {
-      alert("Error: " + error.response.data.message);
+      if (error.response && error.response.status === 400) {
+        alert("Email already registered! Please log in.");
+      } else {
+        alert("Error: " + (error.response?.data?.message || "Something went wrong!"));
+      }
     }
   };
+  
+  
   
   return (
     <>

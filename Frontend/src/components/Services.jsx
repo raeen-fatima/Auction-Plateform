@@ -31,7 +31,7 @@ const OurServices = () => {
 
   return (
     <div className="container m-10 mx-auto p-6 text-center">
-      <h2 className="text-3xl font-bold mb-6">Our Services</h2>
+      <h2 className="text-4xl font-extrabold mb-6 text-primary">Our Services</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((service) => (
           <motion.div

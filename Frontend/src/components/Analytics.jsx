@@ -74,7 +74,7 @@ export function AuctionStats() {
     <>
       <Navbar />
       <div className="flex flex-col items-center justify-center py-28 bg-gray-100 min-h-screen">
-        <h2 className="text-5xl font-extrabold mb-6 text-center">Auction Insights</h2>
+        <h2 className="text-5xl font-extrabold text-primary mb-6 text-center">Auction Insights</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full p-10 max-w-4xl">
           <div className="bg-primary p-6 rounded-lg shadow-md text-white flex flex-col items-center">
             <FaGavel className="text-4xl text-white" />

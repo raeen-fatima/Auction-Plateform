@@ -11,7 +11,7 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: -50 }} 
         animate={{ opacity: 1, y: 0 }} 
         transition={{ duration: 1 }}
-        className="text-3xl font-bold drop-shadow-lg"
+        className="text-4xl font-extrabold drop-shadow-lg"
       >
         Welcome to the Future of Auctions
       </motion.h1>
@@ -29,7 +29,7 @@ export default function HeroSection() {
         href="liveAuction" 
         whileHover={{ scale: 1.1 }} 
         whileTap={{ scale: 0.9 }}
-        className="mt-6 bg-white text-indigo-600 px-4 py-2 rounded-full text-md font-semibold shadow-lg hover:bg-gray-200"
+        className="mt-6 bg-white text-primary px-4 py-2 rounded-full text-md font-semibold shadow-lg hover:bg-gray-200"
       >
         Start Bidding
       </motion.a>

@@ -1,14 +1,12 @@
-import UserDashboard from "../components/Dashboard"
-import Footer from "../components/Footer"
+import DashboardHome from "../components/DashboardHome"
+
 function Dashboard() {
   return (
     <>
     <div>
-      <UserDashboard />
+        <DashboardHome />
     </div>
-    <Footer />
     </>
-
   )
 }
 

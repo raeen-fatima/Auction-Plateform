@@ -27,9 +27,9 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-16 bg-gray-100 text-center">
+    <section className="py-16 text-center">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-gray-800 mb-6">What Our Users Say</h2>
+        <h2 className="text-5xl font-extrabold text-gray-800 mb-6">What Our Users Say</h2>
         <p className="text-lg text-gray-600 mb-10">Real feedback from our happy clients</p>
         
         <Carousel
@@ -39,7 +39,7 @@ const Testimonials = () => {
           interval={4000}
           showThumbs={false}
           showStatus={false}
-          className="max-w-4xl mx-auto"
+          className=" max-w-4xl mx-auto"
         >
           {testimonials.map((testimonial, index) => (
             <motion.div 
@@ -54,7 +54,7 @@ const Testimonials = () => {
                   className="w-full h-full rounded-full object-cover border-4 border-gray-300"
                 />
               </div>
-              <div className="flex flex-col max-w-lg">
+              <div className="flex flex-col max-w-lg ">
                 <p className="text-lg text-gray-700 italic bg-gray-100 p-4 rounded-lg relative before:content-['\201C'] before:text-5xl before:absolute before:-top-4 before:left-2 before:text-gray-400">
                   {testimonial.review}
                 </p>
