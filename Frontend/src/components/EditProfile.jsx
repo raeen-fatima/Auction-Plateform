@@ -19,7 +19,7 @@ const EditProfile = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await fetch('http://localhost:4001/api/profile', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -50,7 +50,7 @@ const EditProfile = () => {
     if (file) formData.append('profilePicture', file);
 
     try {
-      const res = await fetch('http://localhost:4001/api/profile', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/profile`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`
@@ -84,7 +84,7 @@ const EditProfile = () => {
         <div className="flex justify-center mb-6">
           <div className="relative">
             <img
-              src={preview || 'https://via.placeholder.com/100'}
+              src={preview || 'https://media.istockphoto.com/vectors/blue-sign-design-for-photo-placeholder-on-app-design-user-interface-vector-id1330180806?k=20&m=1330180806&s=612x612&w=0&h=ke_UbEg9dYp9-yUfe3fKWTtR5RbjqWifuAsK8O0QapI='}
               alt="Profile"
               className="w-28 h-28 rounded-full object-cover border-4 border-blue-200"
             />

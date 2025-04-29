@@ -17,7 +17,7 @@ const Payment = ({ bidAmount, onPaymentSuccess }) => {
   useEffect(() => {
     const fetchWalletBalance = async () => {
       try {
-        const res = await fetch("http://localhost:4001/user/get-wallet-balance", {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/user/get-wallet-balance`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
@@ -36,7 +36,7 @@ const Payment = ({ bidAmount, onPaymentSuccess }) => {
     if (!res) return toast.error("Failed to load Razorpay SDK.");
 
     try {
-      const orderRes = await fetch("http://localhost:4001/payment/create-order", {
+      const orderRes = await fetch(`${process.env.REACT_APP_API_URL}/payment/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: bidAmount }),
@@ -52,7 +52,7 @@ const Payment = ({ bidAmount, onPaymentSuccess }) => {
         image: "https://example.com/auction-logo.png",
         order_id: orderId,
         handler: async (response) => {
-          const verifyRes = await fetch("http://localhost:4001/payment/verify", {
+          const verifyRes = await fetch(`${process.env.REACT_APP_API_URL}/payment/verify`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

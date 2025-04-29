@@ -21,7 +21,7 @@ const AiAssistant = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4001/api/ai/ask",
+        `${process.env.REACT_APP_API_URL}/api/ai/ask`,
         { message: userMessage }
       );
 

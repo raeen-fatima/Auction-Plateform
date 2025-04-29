@@ -73,7 +73,7 @@ function App() {
         path="/Profile"
         element={
           <ProtectedRoute>
-            <Wallet />
+            <ProfileSection />
           </ProtectedRoute>
         }
       />

@@ -17,7 +17,7 @@ const handleSubmit = async (e) => {
   };
 
   try {
-    const response = await fetch("http://localhost:4001/contact", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/contact`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

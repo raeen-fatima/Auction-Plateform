@@ -62,7 +62,7 @@ const MyBids = () => {
               <Link to={`/product/${bid.product?._id}`}>
                 {bid.product?.image && (
                   <img
-                    src={`http://localhost:4001/uploads/${bid.product.image}`}
+                    src={`${process.env.REACT_APP_API_URL}/uploads/${bid.product.image}`}
                     alt={bid.product.title}
                     className="w-full h-48 object-cover rounded-t-xl"
                   />

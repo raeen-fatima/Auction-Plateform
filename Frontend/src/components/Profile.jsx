@@ -15,7 +15,7 @@ const ProfileSection = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch('http://localhost:4001/api/profile', {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -45,12 +45,30 @@ const ProfileSection = () => {
     setAmount(e.target.value);
   };
 
-  // This function will be passed to Payment as a callback
-  const handlePaymentSuccess = (addedAmount) => {
-    setProfile((prevProfile) => ({
-      ...prevProfile,
-      walletBalance: prevProfile.walletBalance + addedAmount, // Update wallet balance locally
-    }));
+  const handlePaymentSuccess = async (addedAmount) => {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/user/add-funds`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ amount: addedAmount }),
+      });
+  
+      const data = await res.json();
+      if (res.ok) {
+        // Successfully updated wallet on backend
+        setProfile((prevProfile) => ({
+          ...prevProfile,
+          walletBalance: data.updatedBalance, // Assume server returns updated wallet balance
+        }));
+      } else {
+        console.error('Failed to update wallet:', data.message);
+      }
+    } catch (error) {
+      console.error('Error updating wallet:', error);
+    }
   };
 
   if (loading) {
@@ -65,6 +83,14 @@ const ProfileSection = () => {
     return (
       <div className="flex justify-center items-center min-h-screen bg-white">
         <p className="text-base text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-white">
+        <p className="text-base text-gray-400">Profile not found.</p>
       </div>
     );
   }
@@ -84,7 +110,7 @@ const ProfileSection = () => {
             <div className="text-center sm:text-left">
               <h1 className="text-2xl font-semibold text-gray-800">{profile.name || 'Unnamed User'}</h1>
               <p className="text-sm text-gray-500">{profile.email}</p>
-              <span className="inline-block mt-1 px-2 py-0.5 text-xs bg-indigo-100 text-indigo-600 rounded-full">
+              <span className="inline-block mt-1 px-2 py-0.5 text-xs bg-indigo-100 text-primary rounded-full">
                 {profile.role}
               </span>
             </div>
@@ -98,7 +124,7 @@ const ProfileSection = () => {
 
           {/* Wallet */}
           <div className="mt-4 border-t border-gray-200 pt-4 flex items-center gap-2 text-gray-700 text-sm">
-            <FaWallet className="text-indigo-500" />
+            <FaWallet className="text-primary" />
             <span className="font-medium">Wallet:</span> ₹{profile.walletBalance?.toFixed(2) || '0.00'}
           </div>
 

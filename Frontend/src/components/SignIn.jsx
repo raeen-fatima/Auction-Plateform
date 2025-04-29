@@ -15,7 +15,7 @@ const SignIn = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4001/api/auth/login", {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
         email,
         password,
       });
@@ -83,6 +83,12 @@ const SignIn = () => {
               Sign in
             </button>
           </form>
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Dont't Have an Account?{" "}
+            <a href="/signUp" className="text-indigo-600 hover:underline">
+              Sign Up
+            </a>
+          </p>
         </div>
       </div>
     </>

@@ -5,7 +5,7 @@ const ProductCard = ({ product, getRemainingTime }) => {
   return (
     <div className="relative border rounded-2xl shadow-md bg-white overflow-hidden transition-all hover:shadow-2xl hover:scale-[1.02] duration-300">
       <img
-        src={`http://localhost:4001/uploads/${product.image}`}
+        src={`${process.env.REACT_APP_API_URL}/uploads/${product.image}`}
         alt={product.title}
         className="w-full h-48 object-cover"
       />
