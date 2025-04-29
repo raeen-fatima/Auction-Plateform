@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import {
   FaHome,
   FaUser,
   FaGavel,
-  FaEnvelope,
   FaBell,
-  FaHistory,
   FaBookmark,
   FaWallet,
   FaListAlt,
@@ -18,20 +16,18 @@ export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const menuItems = [
-    { name: "Home", icon: <FaHome />, path: "/" },
-    { name: "Auctions", icon: <FaGavel />, path: "/liveAuction" },
-    { name: "Messages", icon: <FaEnvelope />, path: "/chat" },
-    { name: "Notifications", icon: <FaBell />, path: "/notifications" },
-    { name: "Profile", icon: <FaUser />, path: "/profile" },
-    { name: "Bidding History", icon: <FaHistory />, path: "/history" },
-    { name: "Saved Items", icon: <FaBookmark />, path: "/saved" },
-    { name: "Transactions", icon: <FaWallet />, path: "/transactions" },
-    { name: "Recent Activity", icon: <FaListAlt />, path: "/activity" },
-    { name: "Analytics", icon: <FaChartBar />, path: "/analytics" },
+    { name: "Home", icon: <FaHome />, href: "/" },
+    { name: "Auctions", icon: <FaGavel />, href: "/products" },
+    { name: "User Profile", icon: <FaUser />, href: "/Profile" },
+    { name: "Create Auction", icon: <FaBookmark />, href: "/productForm" },
+    { name: "Transactions", icon: <FaWallet />, href: "/transactions" },
+    { name: "Notifications", icon: <FaBell />, href: "/notifications" },
+    { name: "My Bids", icon: <FaListAlt />, href: "/mybids" },
+    { name: "Analytics", icon: <FaChartBar />, href: "/analytics" },
   ];
 
   return (
-    <div className={`h-screen ${sidebarOpen ? "w-64" : "w-20"} transition-all duration-300 bg-primary text-white flex flex-col`}>
+    <div className={`h-screen  ${sidebarOpen ? "w-64" : "w-20"} transition-all duration-300 bg-primary text-white flex flex-col`}>
       {/* Toggle Button */}
       <div className="flex items-center justify-between p-4 mb-8">
         <h2 className={`text-xl font-bold ${!sidebarOpen && "hidden"}`}>Dashboard</h2>
@@ -44,10 +40,10 @@ export default function Sidebar() {
       <ul className="flex-1 space-y-2">
         {menuItems.map((item, index) => (
           <li key={index} className="flex items-center p-3 hover:bg-blue-900 cursor-pointer rounded-md">
-            <Link to={item.path} className="flex items-center w-full">
+            <NavLink to={item.href} className="flex items-center  w-full">
               {item.icon}
               <span className={`ml-3 ${!sidebarOpen && "hidden"}`}>{item.name}</span>
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>

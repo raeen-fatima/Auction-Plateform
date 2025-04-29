@@ -107,7 +107,7 @@ function Services() {
         className="text-center mt-16"
       >
         <Link 
-          to="/liveAuction"
+          to="/products"
           className="bg-primary text-white px-8 py-3 rounded-lg text-xl hover:bg-blue-900 transition-all"
         >
           Explore Auctions

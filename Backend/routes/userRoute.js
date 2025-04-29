@@ -1,12 +1,15 @@
-import express from "express";
-import { signUpUser, loginUser } from "../controllers/userController.js";
-const router = express.Router();
-import protect from "../middleware/authMiddleware.js";
+// // routes/userRoutes.js
+// import express from "express";
+// import protect from "../middleware/authMiddleware.js";
 
-router.post("/signup", signUpUser);
-router.post("/login", loginUser);
-router.get("/profile", protect, (req, res) => {
-    res.json(req.user);
-});
+// const router = express.Router();
 
-export default router;
+// // Profile route: This will only be accessible if the user is authenticated
+// router.get("/profile", protect, (req, res) => {
+//   res.status(200).json({
+//     message: "Accessed protected route!",
+//     user: req.user, // User info decoded from the JWT
+//   });
+// });
+
+// export default router;

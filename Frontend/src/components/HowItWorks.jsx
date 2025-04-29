@@ -24,9 +24,9 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-12  bg-primary text-center">
+    <section className="py-12 mt-5  bg-slate-50 text-center">
       <div className="container mx-auto">
-        <h2 className="text-3xl text-white font-bold mb-6">How It Works</h2>
+        <h2 className="text-5xl text-primary font-extrabold mb-6">How It Works</h2>
         <div className="grid md:grid-cols-3 gap-8 px-6">
           {steps.map((step) => (
             <motion.div

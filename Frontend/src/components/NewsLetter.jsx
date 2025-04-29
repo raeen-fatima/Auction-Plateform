@@ -46,7 +46,7 @@ const NewsletterForm = () => {
         </motion.form>
         {submitted && (
           <motion.p
-            className="mt-4 text-green-600 font-semibold"
+            className="mt-4 text-primary font-semibold"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}

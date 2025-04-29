@@ -1,108 +1,91 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { RxCross2 } from "react-icons/rx";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navbar from "./Navbar";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/"; // Default to home if no "from" exists
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4001/api/users/login", { 
-        email, 
-        password 
+      const res = await axios.post("http://localhost:4001/api/auth/login", {
+        email,
+        password,
       });
 
-      // Backend se token extract karke localStorage me save karenge
-      localStorage.setItem("token", res.data.token);  
-      
-      alert("Login Successful!");
-      navigate("/dashboard");
+      // Save token and user info
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      toast.success("Login Successful!");
+
+      // Navigate to the previous page (from) or default to Dashboard
+      navigate(from, { replace: true }); // 'replace' ensures that the login page won't be in the history stack
     } catch (error) {
-      alert("Login Failed: " + (error.response?.data?.message || "Something went wrong"));
+      toast.error(
+        "Login Failed: " + (error.response?.data?.message || "Something went wrong")
+      );
     }
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 relative">
-      {/* Close Button */}
-      <button 
-        onClick={() => navigate("/")} 
-        className="absolute top-4 right-4 text-gray-600 text-2xl font-bold cursor-pointer"
-      >
-        <RxCross2 />
-      </button>
-      
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-          Sign in to your account
-        </h2>
-      </div>
+    <>
+      <Navbar />
+      <ToastContainer position="top-right" autoClose={3000} />
+      <div className="relative flex min-h-screen flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md relative">
+          <h2 className="text-center text-2xl font-bold text-gray-900">
+            Sign in to your account
+          </h2>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form onSubmit={handleSignIn} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-              Email address
-            </label>
-            <div className="mt-2">
+          <form onSubmit={handleSignIn} className="mt-6 space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email address
+              </label>
               <input
                 id="email"
                 name="email"
                 type="email"
                 required
                 autoComplete="email"
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-          </div>
 
-          <div>
-            <div className="flex items-center justify-between">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
-              <div className="text-sm">
-                <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                  Forgot password?
-                </a>
-              </div>
-            </div>
-            <div className="mt-2">
               <input
                 id="password"
                 name="password"
                 type="password"
                 required
                 autoComplete="current-password"
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-          </div>
 
-          <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600"
+              className="w-full bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-500 shadow-md"
             >
               Sign in
             </button>
-          </div>
-        </form>
-
-        <p className="mt-10 text-center text-sm text-gray-500">
-          Not a member?{' '}
-          <a href="/signUp" className="font-semibold text-indigo-600 hover:text-indigo-500">
-            Sign Up
-          </a>
-        </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
