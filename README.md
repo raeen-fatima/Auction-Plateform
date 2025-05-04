@@ -27,7 +27,7 @@ An advanced web-based platform where users can create, bid, and win auctions in 
 
 ##  Installation
 
-```bash
+
 # Clone the repository
 git clone https://github.com/raeen-fatima/auction-platform.git
 
