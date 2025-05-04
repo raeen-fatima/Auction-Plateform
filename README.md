@@ -28,14 +28,14 @@ An advanced web-based platform where users can create, bid, and win auctions in 
 ##  Installation
 
 
-# Clone the repository
+## Clone the repository
 git clone https://github.com/raeen-fatima/auction-platform.git
 
-# Go to backend
+## Go to backend
 cd server
 npm install
 
-# Go to frontend
+## Go to frontend
 cd ../client
 npm install
 
