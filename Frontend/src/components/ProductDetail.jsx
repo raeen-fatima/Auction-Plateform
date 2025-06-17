@@ -23,7 +23,8 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/products/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL
+}/api/products/${id}`);
         setProduct(res.data.product);
       } catch (err) {
         console.error("Error fetching product", err);
@@ -68,7 +69,8 @@ const ProductDetail = () => {
 
     try {
       await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/bids`,
+      `${import.meta.env.VITE_API_URL
+}/api/bids`,
         { productId: product._id, amount: bidAmount },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -90,7 +92,8 @@ const ProductDetail = () => {
       <div className="max-w-8xl mx-auto py-20 p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-xl shadow-xl p-9">
           <img
-            src={`${process.env.REACT_APP_API_URL}/uploads/${product.image}`}
+            src={`${import.meta.env.VITE_API_URL
+}/uploads/${product.image}`}
             alt={product.title}
             className="w-full h-100 object-cover rounded-lg"
           />

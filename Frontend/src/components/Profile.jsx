@@ -15,7 +15,8 @@ const ProfileSection = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/profile`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL
+}/api/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -47,7 +48,8 @@ const ProfileSection = () => {
 
   const handlePaymentSuccess = async (addedAmount) => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/user/add-funds`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL
+}/user/add-funds`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

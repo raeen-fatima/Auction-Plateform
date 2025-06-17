@@ -19,7 +19,8 @@ const DashboardHome = () => {
   // 🔁 Fetch dashboard data from backend
   const fetchDashboardData = async (token) => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/dashboard`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL
+}/api/dashboard`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
