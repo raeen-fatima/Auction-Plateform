@@ -6,7 +6,7 @@ let io;
 export const initSocket = (server) => {
   io = new Server(server, {
     cors: {
-      origin: process.env.OPENROUTER_REFERER,
+      origin: process.env.FRONTEND_URL,
       methods: ["GET", "POST"]
     }
   });

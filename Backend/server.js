@@ -3,10 +3,11 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import http from "http";
-
+import fs from "fs";
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { initSocket } from "./sockets/socketServer.js";
 import auctionScheduler from "./utils/auctionScheduler.js";
-
 import authRoutes from "./routes/authRoutes.js";
 // import userRoutes from "./routes/userRoute.js";
 import productRoutes from "./routes/productRoutes.js";
@@ -16,18 +17,14 @@ import paymentRoutes from './routes/paymentRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import aiRoutes from "./routes/aiRoutes.js";
 import profileRoutes from './routes/profileRoutes.js';
-import fs from "fs";
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 dotenv.config();
 connectDB();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// After `const __dirname = ...`
+// Create uploads folder if not exists
 const uploadsDir = path.join(__dirname, 'uploads');
-
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir);
 }
@@ -35,12 +32,24 @@ if (!fs.existsSync(uploadsDir)) {
 const app = express();
 const server = http.createServer(app);
 
+// ✅ CORS Configuration
+const allowedOrigins = [process.env.FRONTEND_URL,];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 
 // Middlewares
-app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Routes
 app.use("/api/auth", authRoutes);
 // app.use("/api/user", userRoutes);
 app.use("/api/products", productRoutes);
@@ -51,9 +60,10 @@ app.use(contactRoutes);
 app.use("/api/ai", aiRoutes);
 app.use('/api/profile', profileRoutes);
 
-// Initialize Socket.IO
+// Initialize Socket.IO & Scheduler
 initSocket(server);
 auctionScheduler(); 
 
+// Start Server
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

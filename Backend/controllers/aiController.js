@@ -21,7 +21,7 @@ export const getAIResponse = async (req, res) => {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
           "HTTP-Referer":
-            process.env.OPENROUTER_REFERER || "http://localhost:5173",
+            process.env.FRONTEND_URL || "http://localhost:5173",
           "X-Title": "BidNest",
         },
       }
