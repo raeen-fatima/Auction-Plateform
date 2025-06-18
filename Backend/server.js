@@ -33,17 +33,23 @@ const app = express();
 const server = http.createServer(app);
 
 // ✅ CORS Configuration
-const allowedOrigins = [process.env.FRONTEND_URL,];
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://auction-plateform.vercel.app'
+];
+
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow no-origin requests (like Postman)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,
 }));
+
 
 // Middlewares
 app.use(express.json());
