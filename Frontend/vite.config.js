@@ -12,4 +12,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
+  base: "/", // Important for Vercel routing
 });
