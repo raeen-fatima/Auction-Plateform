@@ -20,9 +20,9 @@ export const updateProfile = async (req, res) => {
   };
 
   // 👇 check if a file was uploaded
-  if (req.file) {
-    updatedData.profilePicture = `http://localhost:4001/uploads/${req.file.filename}`;
-  }
+  const baseUrl = req.protocol + '://' + req.get('host');
+  updatedData.profilePicture = `${baseUrl}/uploads/${req.file.filename}`;
+
 
   try {
     const updatedUser = await User.findByIdAndUpdate(

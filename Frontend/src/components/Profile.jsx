@@ -39,7 +39,8 @@ const ProfileSection = () => {
     if (!profile?.profilePicture) return 'https://via.placeholder.com/150';
     return profile.profilePicture.startsWith('http')
       ? profile.profilePicture
-      : `http://localhost:4001/${profile.profilePicture}`;
+      : `${import.meta.env.VITE_API_URL}/${profile.profilePicture}`;
+
   };
 
   const handleAmountChange = (e) => {

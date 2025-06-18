@@ -183,7 +183,7 @@ const AllProducts = () => {
                 >
                   <div className="relative w-full h-52 overflow-hidden">
                     <img
-                      src={`http://localhost:4001/uploads/${product.image}`}
+                      src={`${import.meta.env.VITE_API_URL}/uploads/${product.image}`}
                       alt={product.title}
                       className="w-full h-full object-cover"
                     />

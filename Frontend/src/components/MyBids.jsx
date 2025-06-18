@@ -12,7 +12,8 @@ const MyBids = () => {
   useEffect(() => {
     const fetchBids = async () => {
       try {
-        const res = await axios.get("http://localhost:4001/api/bids/mybids", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/bids/mybids`, {
+
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -62,8 +63,7 @@ const MyBids = () => {
               <Link to={`/product/${bid.product?._id}`}>
                 {bid.product?.image && (
                   <img
-                    src={`${import.meta.env.VITE_API_URL
-}/uploads/${bid.product.image}`}
+                    src={`${import.meta.env.VITE_API_URL}/uploads/${bid.product.image}`}
                     alt={bid.product.title}
                     className="w-full h-48 object-cover rounded-t-xl"
                   />

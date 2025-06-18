@@ -8,8 +8,7 @@ const RecommendedAuctions = ({ currentProductId }) => {
   useEffect(() => {
     const fetchRecommended = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL
-}/api/products/all`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/all`);
         const filtered = res.data.products.filter(p => p._id !== currentProductId);
         setRecommended(filtered.slice(0, 5)); // show top 5
       } catch (err) {
@@ -32,7 +31,8 @@ const RecommendedAuctions = ({ currentProductId }) => {
             className="min-w-[250px] bg-white rounded-xl shadow hover:shadow-lg transition duration-300"
           >
             <img
-              src={`http://localhost:4001/uploads/${product.image}`}
+              src={`${import.meta.env.VITE_API_URL}/uploads/${product.image}`}
+
               alt={product.title}
               className="h-48 w-full object-cover rounded-t-xl"
             />

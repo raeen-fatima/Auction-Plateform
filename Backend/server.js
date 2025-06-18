@@ -17,10 +17,13 @@ import contactRoutes from './routes/contactRoutes.js';
 import aiRoutes from "./routes/aiRoutes.js";
 import profileRoutes from './routes/profileRoutes.js';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 connectDB();
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const server = http.createServer(app);
 
@@ -28,7 +31,7 @@ const server = http.createServer(app);
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("uploads"));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/api/auth", authRoutes);
 // app.use("/api/user", userRoutes);
