@@ -16,7 +16,7 @@ import paymentRoutes from './routes/paymentRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import aiRoutes from "./routes/aiRoutes.js";
 import profileRoutes from './routes/profileRoutes.js';
-
+import fs from "fs";
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -24,6 +24,14 @@ dotenv.config();
 connectDB();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// After `const __dirname = ...`
+const uploadsDir = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
+
 const app = express();
 const server = http.createServer(app);
 
