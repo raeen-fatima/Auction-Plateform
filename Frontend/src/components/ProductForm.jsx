@@ -73,7 +73,6 @@ const ProductForm = () => {
               onChange={handleChange}
               required
             />
-
             <input
               type="number"
               name="startPrice"
@@ -82,8 +81,7 @@ const ProductForm = () => {
               onChange={handleChange}
               required
             />
-
-            <input
+              <input
               type="datetime-local"
               name="startTime"
               className="w-full border border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary"

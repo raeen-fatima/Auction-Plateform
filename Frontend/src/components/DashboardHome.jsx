@@ -190,7 +190,7 @@ const DashboardHome = () => {
 
           {/* Create Auction Button */}
           <div className="flex justify-center mt-6">
-            <button 
+            <button  href="/Frontend/src/components/ProductDetail.jsx"
               onClick={() => setIsModalOpen(true)}
               className="bg-primary w-40 text-white px-4 py-2 rounded-lg flex items-center gap-2 shadow-md hover:bg-blue-900 transition"
             >
