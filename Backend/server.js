@@ -22,20 +22,10 @@ dotenv.config();
 connectDB();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// Create uploads folder if not exists
-const uploadsDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
-}
-
 const app = express();
 const server = http.createServer(app);
-
-// ✅ CORS Configuration
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  'https://auction-plateform.vercel.app'
 ];
 
 app.use(cors({
@@ -54,7 +44,6 @@ app.use(cors({
 // Middlewares
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 // Routes
 app.use("/api/auth", authRoutes);
 // app.use("/api/user", userRoutes);
@@ -72,4 +61,4 @@ auctionScheduler();
 
 // Start Server
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
