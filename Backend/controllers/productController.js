@@ -3,18 +3,30 @@ import Product from "../models/Product.js";
 export const createProduct = async (req, res) => {
   try {
     const {
-  title,
-  description,
-  currentBid = 0,
-  startPrice,
-  startTime,
-  endTime,
-  sellerId = "anonymous", // optional default
-  status = "upcoming",     // or "active"
-} = req.body;
+      title,
+      description,
+      currentBid = 0,
+      startPrice,
+      startTime,
+      endTime,
+      sellerId = "test-seller",
+      status = "upcoming",
+    } = req.body;
 
+    console.log("Incoming Data:", {
+      title,
+      description,
+      currentBid,
+      startPrice,
+      startTime,
+      endTime,
+      sellerId,
+      status,
+    });
 
-    const image = req.file?.path || null; // Cloudinary image URL
+    console.log("Uploaded Image:", req.file);
+
+    const image = req.file?.path || null;
 
     const product = new Product({
       title,
@@ -25,15 +37,18 @@ export const createProduct = async (req, res) => {
       endTime,
       sellerId,
       status,
-      image, //  Cloudinary URL saved in DB
+      image,
     });
 
     await product.save();
+
     res.status(201).json({ success: true, product });
   } catch (error) {
+    console.error("❌ Create Product Error:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
 
 export const getAllProducts = async (req, res) => {
   try {
