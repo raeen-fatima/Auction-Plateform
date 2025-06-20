@@ -3,15 +3,16 @@ import Product from "../models/Product.js";
 export const createProduct = async (req, res) => {
   try {
     const {
-      title,
-      description,
-      currentBid,
-      startPrice,
-      startTime,
-      endTime,
-      sellerId,
-      status,
-    } = req.body;
+  title,
+  description,
+  currentBid = 0,
+  startPrice,
+  startTime,
+  endTime,
+  sellerId = "anonymous", // optional default
+  status = "upcoming",     // or "active"
+} = req.body;
+
 
     const image = req.file?.path || null; // Cloudinary image URL
 
