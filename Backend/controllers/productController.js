@@ -13,7 +13,7 @@ export const createProduct = async (req, res) => {
       status,
     } = req.body;
 
-    const image = req.file?.path || null; // ✅ Cloudinary image URL
+    const image = req.file?.path || null; // Cloudinary image URL
 
     const product = new Product({
       title,
@@ -24,7 +24,7 @@ export const createProduct = async (req, res) => {
       endTime,
       sellerId,
       status,
-      image, // ✅ Cloudinary URL saved in DB
+      image, //  Cloudinary URL saved in DB
     });
 
     await product.save();
