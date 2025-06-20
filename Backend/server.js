@@ -24,21 +24,25 @@ connectDB();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const server = http.createServer(app);
-const allowedOrigins = [
-  process.env.FRONTEND_URL, "https://auction-plateform.vercel.app"
-];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow no-origin requests (like Postman)
+    console.log("🟡 Incoming Origin:", origin);
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      "https://auction-plateform.vercel.app"
+    ];
+
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.error(" Blocked by CORS:", origin);
       callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,
 }));
+
 
 
 // Middlewares
