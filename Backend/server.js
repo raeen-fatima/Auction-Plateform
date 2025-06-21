@@ -30,7 +30,9 @@ app.use(cors({
     console.log("🟡 Incoming Origin:", origin);
     const allowedOrigins = [
       process.env.FRONTEND_URL,
-      "https://auction-plateform.vercel.app"
+      "https://auction-plateform.vercel.app",
+      "https://auction-plateform-l7uua3yzh-raeen-saifis-projects.vercel.app"
+      
     ];
 
     if (!origin || allowedOrigins.includes(origin)) {

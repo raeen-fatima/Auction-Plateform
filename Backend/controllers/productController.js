@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import Product from "../models/Product.js";
 
 export const createProduct = async (req, res) => {
   try {
@@ -13,11 +14,17 @@ export const createProduct = async (req, res) => {
       status = "upcoming",
     } = req.body;
 
-    if (!req.file?.path) {
+    console.log("📥 Incoming Product Data:", {
+      title, description, startPrice, startTime, endTime
+    });
+
+    if (!req.file) {
+      console.error("🚫 No image file found in request");
       return res.status(400).json({ success: false, error: "Image not uploaded" });
     }
 
     const image = req.file.path;
+    console.log("📸 Uploaded Image Path:", image);
 
     const product = new Product({
       title,
@@ -32,12 +39,14 @@ export const createProduct = async (req, res) => {
     });
 
     await product.save();
+
     res.status(201).json({ success: true, product });
   } catch (error) {
     console.error("❌ Create Product Error:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
 
 
 
