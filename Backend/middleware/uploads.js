@@ -1,7 +1,14 @@
-// backend/middleware/uploads.js
+import multer from 'multer';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import cloudinary from '../config/cloudinary.js';
 
-import multer from "multer";
-import { storage } from "../config/cloudinary.js"; // Cloudinary config
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'BidNest_Products',
+    allowed_formats: ['jpg', 'png', 'jpeg'],
+  },
+});
 
 const upload = multer({ storage });
 
