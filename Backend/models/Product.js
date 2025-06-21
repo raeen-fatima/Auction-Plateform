@@ -47,7 +47,13 @@ const productSchema = new mongoose.Schema({
   finalPrice: {
      type: Number
   },
+  sellerId: {
+  type: String,
+  required: true,
+},
 
+},{
+  timestamps: true
 });
 
 const Product = mongoose.model("Product", productSchema);
