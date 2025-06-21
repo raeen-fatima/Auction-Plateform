@@ -5,8 +5,8 @@ import RecommendedAuctions from "./RecommandedAuct";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CountdownTimer from "./Countdown";
-import Payment from "./Payment"; // Import Payment Component
-import Bid from "./Bid"; // Import Bid Component
+import Payment from "./Payment";
+import Bid from "./Bid";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,8 +23,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL
-}/api/products/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
         setProduct(res.data.product);
       } catch (err) {
         console.error("Error fetching product", err);
@@ -40,21 +39,26 @@ const ProductDetail = () => {
     if (!product) return;
 
     const endTime = new Date(product.endTime).getTime();
+
     const updateTime = () => {
       const now = new Date().getTime();
       const difference = endTime - now;
+
       if (difference <= 0) {
         setTimeLeft("Auction ended");
         return;
       }
+
       const hours = Math.floor(difference / (1000 * 60 * 60));
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
       setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
     };
 
     const timer = setInterval(updateTime, 1000);
     updateTime();
+
     return () => clearInterval(timer);
   }, [product]);
 
@@ -69,11 +73,11 @@ const ProductDetail = () => {
 
     try {
       await axios.post(
-      `${import.meta.env.VITE_API_URL
-}/api/bids`,
+        `${import.meta.env.VITE_API_URL}/api/bids`,
         { productId: product._id, amount: bidAmount },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
       toast.success("Bid placed successfully!");
       setBidAmount("");
     } catch (err) {
@@ -92,21 +96,34 @@ const ProductDetail = () => {
       <div className="max-w-8xl mx-auto py-20 p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-xl shadow-xl p-9">
           <img
-            src={`${import.meta.env.VITE_API_URL
-}/uploads/${product.image}`}
+            src={product.image}
             alt={product.title}
             className="w-full h-100 object-cover rounded-lg"
           />
+
           <div className="space-y-4">
             <h2 className="text-4xl font-bold text-gray-800">{product.title}</h2>
             <p className="text-gray-600">{product.description}</p>
-            <CountdownTimer targetDate={product.endTime} />
-            <p className="text-2xl font-bold underline text-black"> Start Price: ₹{product.startPrice}</p>
 
-            <Bid product={product} isAuctionEnded={isAuctionEnded} isBidValid={isBidValid} bidAmount={bidAmount} setBidAmount={setBidAmount} handleBidSubmit={handleBidSubmit} />
+            <CountdownTimer targetDate={product.endTime} />
+
+            <p className="text-2xl font-bold underline text-black">
+              Start Price: ₹{product.startPrice}
+            </p>
+
+            <Bid
+              product={product}
+              isAuctionEnded={isAuctionEnded}
+              isBidValid={isBidValid}
+              bidAmount={bidAmount}
+              setBidAmount={setBidAmount}
+              handleBidSubmit={handleBidSubmit}
+            />
+
             <Payment bidAmount={bidAmount || product.startPrice} />
           </div>
         </div>
+
         <RecommendedAuctions />
       </div>
       <Footer />
